@@ -30,11 +30,7 @@ class Csv_AutoDetect
     {
         $linefeed = $this->guessLinefeed($data);
         $data = rtrim($data, $linefeed);
-        $count = count(explode($linefeed, $data));
-        // threshold is ten, so add one to account for extra linefeed that is supposed to be at the end
-        if ($count < 10) {
-            throw new Csv_Exception_CannotDetermineDialect('You must provide at least ten lines in your sample data');
-        }
+        
         list($quote, $delim) = $this->guessQuoteAndDelim($data);
         if (!$quote) {
             $quote = '"';
